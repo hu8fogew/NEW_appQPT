@@ -1,0 +1,85 @@
+//
+//  PrefixHeader.pch
+//  家长界
+//
+//  Created by mac on 16/11/4.
+//  Copyright © 2016年 haha😄. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "DataBase.h"
+#import "Define.h"
+
+#import "NSObject+MJExtension.h"
+#import "MJExtension.h"
+#import "AFNetworking.h"
+/**
+ *  首页
+ */
+
+
+
+//企聘通
+#import "QPTViewController.h"
+#import "HotZWTableViewCell.h"
+#import "YCYMViewController.h"
+#import "CMDSTableViewCell.h"
+#import "QZSPViewController.h"
+#import "JZDRViewController.h"
+#import "RMJZTableViewCell.h"
+#import "HWLYViewController.h"
+#import "HWSearchBar.h"
+#import "QPTSearchView.h"
+/**
+ *  消息
+ */
+#import "MessageViewController.h"
+
+
+/**
+ *  发现
+ */
+#import "DiscoverViewController.h"
+
+
+/**
+ *  个人
+ */
+#import "OwnerViewController.h"
+
+
+/**
+ *  工具
+ */
+//segument选择条目
+#import "SGSegmentedControl.h"
+#import "AdvertisingColumn.h"
+#import "UIImageView+WebCache.h"
+#import "WYAutoCarusel.h"
+#import "DCPicScrollView.h"
+#import "Masonry.h"
+#import "SiftView.h"
+#import "PlaceholderTextView.h"
+
+
+#import <MediaPlayer/MediaPlayer.h>
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "XCAVPlayerView.h"
+
+/**
+ *  其他
+ */
+
+#import "UIBarButtonItem+Extension.h"
+#import "UIView+Extension.h"
+#import "MainNavigationController.h"
+#import "MainTabBarController.h"
+#import "NewfeatureViewController.h"
+#import "UIWindow+MainWindow.h"
+#endif /* PrefixHeader_pch */
