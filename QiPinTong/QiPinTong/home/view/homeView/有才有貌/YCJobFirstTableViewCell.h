@@ -1,0 +1,32 @@
+//
+//  YCJobFirstTableViewCell.h
+//  家长界
+//
+//  Created by taylor on 2016/12/19.
+//  Copyright © 2016年 西部家联. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@class JobDetialLayout;
+@interface YCJobFirstTableViewCell : UITableViewCell
+
+@property (strong,nonatomic) JobDetialLayout *jobLayout;
+
+/**职称*/
+@property (strong,nonatomic) UILabel *titleLabel;
+@property (strong,nonatomic) UILabel *subLabel;
+
+/**地址*/
+@property (strong,nonatomic) UIImageView *addressIcon;
+@property (strong,nonatomic) UILabel *addressLabel;
+
+/**年限*/
+@property (strong,nonatomic) UIImageView *ageIcon;
+@property (strong,nonatomic) UILabel *ageLabel;
+
+/**学历*/
+@property (strong,nonatomic) UIImageView *eduIcon;
+@property (strong,nonatomic) UILabel *eduLabel;
+
+
+@end

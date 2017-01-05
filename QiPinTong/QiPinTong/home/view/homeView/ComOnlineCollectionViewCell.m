@@ -1,0 +1,146 @@
+//
+//  ComOnlineCollectionViewCell.m
+//  家长界
+//
+//  Created by taylor on 2016/12/6.
+//  Copyright © 2016年 西部家联. All rights reserved.
+//
+
+#import "ComOnlineCollectionViewCell.h"
+
+@implementation ComOnlineCollectionViewCell
+
+-(id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.46, SCREEN_WIDTH*0.6)];
+        vi.backgroundColor = HWColor(241, 241, 241);
+        [self addSubview:vi];
+        
+        self.imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.46, SCREEN_WIDTH*0.43)];
+        [vi addSubview:self.imgView];
+        
+        UIView *vv = [UIView new];
+        vv.backgroundColor = HWColor(88, 88, 88);
+        vv.alpha = 0.6;
+        [self.imgView addSubview:vv];
+        [vv mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(self.imgView);
+            make.bottom.equalTo(self.imgView.mas_bottom);
+            make.height.mas_equalTo(self.imgView.height/6);
+        }];
+        
+        self.titleLabel = [UILabel new];
+        self.titleLabel.font = [UIFont systemFontOfSize:15];
+        self.titleLabel.textColor = [UIColor whiteColor];
+        [self.imgView addSubview:self.titleLabel];
+        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.imgView).with.offset(5);
+            make.bottom.equalTo(self.imgView.mas_bottom).with.offset(-5);
+        }];
+        
+        self.vIcon = [UIImageView new];
+        self.vIcon.image = [UIImage imageNamed:@"vip"];
+        [self.imgView addSubview:self.vIcon];
+        [self.vIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.titleLabel.mas_right).with.offset(2);
+            make.centerY.equalTo(self.titleLabel);
+            make.size.mas_equalTo(CGSizeMake(14, 14));
+        }];
+        
+        self.NoLabel = [UILabel new];
+        self.NoLabel.font = [UIFont systemFontOfSize:15];
+        self.NoLabel.textColor = [UIColor whiteColor];
+        [self.imgView addSubview:self.NoLabel];
+        [self.NoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.imgView).with.offset(-6);
+            make.centerY.equalTo(self.titleLabel);
+        }];
+        
+        self.eIcon = [UIImageView new];
+        self.eIcon.image = [UIImage imageNamed:@"eyeImage"];
+        [self.imgView addSubview:self.eIcon];
+        [self.eIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.NoLabel.mas_left).with.offset(-2);
+            make.centerY.equalTo(self.titleLabel);
+            make.size.mas_equalTo(CGSizeMake(15, 13));
+        }];
+        
+        self.proLabel = [UILabel new];
+        self.proLabel.textColor = HWColor(153, 153, 153);
+        self.proLabel.font = [UIFont systemFontOfSize:13];
+        [vi addSubview:self.proLabel];
+        [self.proLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(vi).with.offset(6);
+            make.top.equalTo(self.imgView.mas_bottom).with.offset(SCREEN_WIDTH*0.14/5);
+        }];
+        
+        UIView *fv = [UIView new];
+        fv.backgroundColor = HWColor(153, 153, 153);
+        [vi addSubview:fv];
+        [fv mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.proLabel.mas_right).with.offset(3);
+            make.centerY.equalTo(self.proLabel);
+            make.size.mas_equalTo(CGSizeMake(1, 14));
+        }];
+        
+        self.typeLabel = [UILabel new];
+        self.typeLabel.font = [UIFont systemFontOfSize:13];
+        self.typeLabel.textColor = HWColor(153, 153, 153);
+        [vi addSubview:self.typeLabel];
+        [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(fv).with.offset(4);
+            make.centerY.equalTo(self.proLabel);
+        }];
+        
+        self.addressLabel = [UILabel new];
+        self.addressLabel.font = [UIFont systemFontOfSize:13];
+        self.addressLabel.textColor = HWColor(153, 153, 153);
+        [vi addSubview:self.addressLabel];
+        [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(vi).with.offset(-5);
+            make.centerY.equalTo(self.proLabel);
+        }];
+        
+        self.locaIcon = [UIImageView new];
+        self.locaIcon.image = [UIImage imageNamed:@"qpt_map_image"];
+        [vi addSubview:self.locaIcon];
+        [self.locaIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.addressLabel.mas_left).with.offset(-3);
+            make.centerY.equalTo(self.proLabel);
+            make.size.mas_equalTo(CGSizeMake(12, 13));
+        }];
+        
+        self.infoLabel = [UILabel new];
+        self.infoLabel.font = [UIFont systemFontOfSize:13];
+        self.infoLabel.textColor = HWColor(153, 153, 153);
+        [vi addSubview:self.infoLabel];
+        [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.proLabel);
+            make.top.equalTo(self.proLabel.mas_bottom).with.offset(6);
+        }];
+        
+        self.contentLabel = [UILabel new];
+        self.contentLabel.font = [UIFont systemFontOfSize:13];
+        self.contentLabel.textColor = HWColor(65, 188, 228);
+        [vi addSubview:self.contentLabel];
+        [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.infoLabel.mas_right);
+            make.centerY.equalTo(self.infoLabel);
+        }];
+        
+        self.contsLabel = [UILabel new];
+        self.contsLabel.font = [UIFont systemFontOfSize:13]
+        ;
+        self.contsLabel.textColor = HWColor(153, 153, 153);
+        [vi addSubview:self.contsLabel];
+        [self.contsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentLabel.mas_right);
+            make.centerY.equalTo(self.infoLabel);
+        }];
+    }
+    return self;
+}
+
+@end

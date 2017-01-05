@@ -1,0 +1,261 @@
+//
+//  RobCoinViewController.m
+//  家长界
+//
+//  Created by taylor on 2016/12/30.
+//  Copyright © 2016年 西部家联. All rights reserved.
+//
+
+#import "RobCoinViewController.h"
+
+@interface RobCoinViewController ()<UITableViewDelegate,UITableViewDataSource,WYAutoCaruselDelegate>
+
+@property (strong,nonatomic) UITableView *tableView;
+
+@property (strong,nonatomic) UIView *headerView;
+
+@property (strong,nonatomic) NSMutableArray *arrLunBo;
+
+/**按钮切换*/
+@property (strong,nonatomic) UIView *switchView;
+@property (strong,nonatomic) UIButton *coinBtn;
+@property (strong,nonatomic) UIButton *couponBtn;
+
+@property (strong,nonatomic) NSString *switchString;
+
+@property (strong,nonatomic) UILabel *bb;
+@end
+
+@implementation RobCoinViewController
+id coinCell = nil;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.view addSubview:self.tableView];
+    
+    [self.headerView addSubview:self.switchView];
+    
+    [self createAdsPageWithArr:self.arrLunBo];
+    
+    self.switchString = @"抢通币";
+    self.coinBtn.selected = YES;
+    
+    [self.switchView addSubview:self.coinBtn];
+    [self.switchView addSubview:self.couponBtn];
+    
+}
+
+#pragma mark /*-----懒加载-------*/
+
+/*轮播*/
+-(NSMutableArray *)arrLunBo
+{
+    if (!_arrLunBo) {
+        _arrLunBo = [DataBase addSelecteArray];
+        
+    }
+    return _arrLunBo;
+}
+
+-(UIView *)headerView{
+    if (!_headerView) {
+        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lunBoheight)];
+        
+    }
+    return _headerView;
+}
+
+-(UIView *)switchView{
+    if (!_switchView) {
+        _switchView = [[UIView alloc]initWithFrame:CGRectMake(0, lunBoheight, SCREEN_WIDTH, 60)];
+        _switchView.backgroundColor = HWColor(241, 241, 241);
+        
+        UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        vi.backgroundColor = [UIColor whiteColor];
+        [_switchView addSubview:vi];
+        
+        [_switchView addSubview:self.coinBtn];
+        
+    }
+    return _switchView;
+}
+
+-(UIButton *)coinBtn{
+    if (!_coinBtn) {
+        _coinBtn = [self createBtnWithframe:CGRectMake(0, 0, SCREEN_WIDTH/2, 50) andTitle:@"抢通币" andTag:0];
+        _coinBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, -30);
+    }
+    return _coinBtn;
+}
+
+-(UIButton *)couponBtn{
+    if (!_couponBtn) {
+        _couponBtn = [self createBtnWithframe:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 50) andTitle:@"优惠券" andTag:1];
+        _couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 30);
+    }
+    return _couponBtn;
+}
+
+-(UIButton *)createBtnWithframe:(CGRect)frame andTitle:(NSString *)title andTag:(NSInteger)tag
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = frame;
+    [button setTitle:title forState:UIControlStateNormal];
+    button.tag = tag;
+    button.titleLabel.font = [UIFont systemFontOfSize:17];
+    [button setTitleColor:HWColor(51, 51, 51) forState:UIControlStateNormal];
+    [button setTitleColor:HWColor(238, 0, 0) forState:UIControlStateSelected];
+    [button addTarget:self action:@selector(selectButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.switchView addSubview:button];
+    return button;
+}
+
+//选择按钮实现的方法
+-(void)selectButtonClick:(UIButton *)sender
+{
+    if (sender.tag == 0) {
+        self.coinBtn.selected = YES;
+        self.couponBtn.selected = NO;
+        HWLog(@"抢通币");
+        self.switchString = @"抢通币";
+        [self.tableView reloadData];
+        
+    }
+    
+    if (sender.tag == 1) {
+        HWLog(@"优惠券");
+        self.coinBtn.selected = NO;
+        self.couponBtn.selected = YES;
+        self.switchString = @"优惠券";
+        [self.tableView reloadData];
+        
+    }
+}
+
+
+#pragma mark /*****轮播图的实现*****/
+-(void)createAdsPageWithArr:(NSMutableArray *)source
+{
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    for (NSDictionary *dic in source) {
+        [arr addObject:[dic objectForKey:@"slecteImg"]];
+    }
+    //封装的轮播view实现
+    WYAutoCarusel *aut = [[WYAutoCarusel alloc]init];
+    [aut createCaruselWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lunBoheight) WithSuperView:self.headerView WithImageUrlArr:arr WithPlaceholderImageName:@"1" WithInterval:2];
+    
+    [aut createPageControlWithFrame:CGRectMake(SCREEN_WIDTH-60, lunBoheight-30, 30, 20) WithSuperView:self.headerView WithPageNum:arr.count WithCurrentColor:HWColor(248, 114, 1) WithTintColor:[UIColor whiteColor]];
+    
+    aut.delegate = self;
+}
+
+/*轮播图跳转代理*/
+-(void)pushViewController:(NSInteger)tag
+{
+    
+    HWLog(@"laniahao ");
+}
+
+#pragma mark /*------tableView及方法------*/
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _tableView.tableHeaderView = self.headerView;
+        _tableView.tableHeaderView.height = self.headerView.height+self.switchView.height;
+        
+        _tableView.allowsSelection = NO;
+    }
+    return _tableView;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if ([self.switchString isEqualToString:@"抢通币"]) {
+    
+            CoinTableViewCell *cell = [[CoinTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"qiangId"];
+            cell.backgroundColor = HWColor(241, 241, 241);
+            coinCell = cell;
+            cell.imgView.image = [UIImage imageNamed:@"cellView"];
+            cell.titleLabel.text = @"胡椒厨房(赛格店)";
+            cell.typeLabel.text = @"西餐厅";
+            cell.kindLabel.text = @"自助餐";
+            cell.addressIcon.image = [UIImage imageNamed:@"qpt_map_image"];
+            cell.addressLabel.text = @"2.3km";
+            cell.coinImgView.image = [UIImage imageNamed:@"gold"];
+            cell.numLabel.text = @"剩余 : 15";
+        
+    }
+    else{
+            static NSString *identifier = @"identifier";
+        CouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (indexPath.row%2==0) {
+            cell = [[CouponTableViewCell alloc]initWithFrame:cell.bounds];
+                cell.backgroundColor = HWColor(241, 241, 241);
+                coinCell = cell;
+                cell.imgView.image = [UIImage imageNamed:@"cellView"];
+                cell.titleLabel.text = @"胡椒厨房(赛格店)";
+                cell.typeLabel.text = @"西餐厅";
+                cell.kindLabel.text = @"自助餐";
+                cell.addressIcon.image = [UIImage imageNamed:@"qpt_map_image"];
+                cell.addressLabel.text = @"2.3km";
+                
+                cell.couponView.backgroundColor = HWColor(238, 0, 0);
+                cell.RMB.text = @"¥";
+                cell.priceLabel.text = @"100";
+                cell.yuan.text = @"元";
+                [cell.useBtn addTarget:self action:@selector(useBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        
+                }
+        else{
+            CouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil) {
+                cell = [[CouponTableViewCell alloc]initWithFrame:cell.bounds];
+                cell.backgroundColor = HWColor(241, 241, 241);
+                coinCell = cell;
+                cell.imgView.image = [UIImage imageNamed:@"cellView"];
+                cell.titleLabel.text = @"胡椒厨房(赛格店)";
+                cell.typeLabel.text = @"西餐厅";
+                cell.kindLabel.text = @"自助餐";
+                cell.addressIcon.image = [UIImage imageNamed:@"qpt_map_image"];
+                cell.addressLabel.text = @"2.3km";
+                
+                cell.couponView.backgroundColor = HWColor(253, 151, 47);
+                cell.priceLabel.text = @"8.5";
+                cell.yuan.text = @"折";
+                [cell.useBtn addTarget:self action:@selector(btnUseClick) forControlEvents:UIControlEventTouchUpInside];
+        }
+
+    }
+    }
+    return coinCell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return SCREEN_WIDTH*0.3;
+}
+
+-(void)useBtnClick{
+    HWLog(@"立即使用");
+}
+
+-(void)btnUseClick{
+    HWLog(@"打折使用");
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+@end
