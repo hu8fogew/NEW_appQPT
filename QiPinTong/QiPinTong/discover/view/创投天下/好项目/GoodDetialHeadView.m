@@ -86,13 +86,13 @@
         vi2.backgroundColor = [UIColor whiteColor];
         [vi addSubview:vi2];
         
-        self.financingLabel = [self createLabelWithFont:14 andTextColor:HWColor(51, 51, 51) andSview:vi1];
+        self.financingLabel = [self createLabelWithFont:descTitleSize andTextColor:HWColor(51, 51, 51) andSview:vi1];
         [self.financingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(vi1);
         
         }];
         
-        self.financeNoLabel = [self createLabelWithFont:14 andTextColor:HWColor(51, 51, 51) andSview:vi2];
+        self.financeNoLabel = [self createLabelWithFont:descTitleSize andTextColor:HWColor(51, 51, 51) andSview:vi2];
         [self.financeNoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(vi2);
         }];

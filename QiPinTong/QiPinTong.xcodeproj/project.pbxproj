@@ -423,12 +423,16 @@
 		0435D8EE1E1B82F50009BDF0 /* CCPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435D8ED1E1B82F50009BDF0 /* CCPScrollView.m */; };
 		0435D8F31E1BA1B20009BDF0 /* PhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435D8F01E1BA1B20009BDF0 /* PhotoViewCell.m */; };
 		0435D8F41E1BA1B20009BDF0 /* PhotoViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435D8F21E1BA1B20009BDF0 /* PhotoViewLayout.m */; };
+		04A167AC1E1F9E5000412D39 /* InvestMentCompanyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A167AB1E1F9E5000412D39 /* InvestMentCompanyView.m */; };
+		04A167AF1E1F9EA800412D39 /* InvestmentLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A167AE1E1F9EA800412D39 /* InvestmentLayout.m */; };
+		04A167B21E1FB81500412D39 /* InvestorDescView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A167B11E1FB81500412D39 /* InvestorDescView.m */; };
 		04E4BA351E1DDFE200775D9B /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BA341E1DDFE200775D9B /* AdView.m */; };
 		04E4BA381E1DE44700775D9B /* PersonalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BA371E1DE44700775D9B /* PersonalLayout.m */; };
 		04E4BA3C1E1DE5EE00775D9B /* LWTextStorage+TextStroage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BA3B1E1DE5EE00775D9B /* LWTextStorage+TextStroage.m */; };
 		04E4BA3F1E1E2FB800775D9B /* CompanyLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BA3E1E1E2FB800775D9B /* CompanyLayout.m */; };
 		04E4BA421E1E425300775D9B /* DescCompanyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BA411E1E425300775D9B /* DescCompanyView.m */; };
 		04E4BA451E1E765D00775D9B /* JobDetialLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BA441E1E765D00775D9B /* JobDetialLayout.m */; };
+		04FEA0721E1F40630012B764 /* GoodProjectLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEA0711E1F40630012B764 /* GoodProjectLayout.m */; };
 		9E5A841C1E1D327900D12404 /* vent.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5A841B1E1D327900D12404 /* vent.png */; };
 		9E5A841E1E1D342500D12404 /* tb.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5A841D1E1D342500D12404 /* tb.png */; };
 		9E5A84201E1D349D00D12404 /* hr.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5A841F1E1D349D00D12404 /* hr.png */; };
@@ -1174,6 +1178,12 @@
 		0435D8F01E1BA1B20009BDF0 /* PhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewCell.m; sourceTree = "<group>"; };
 		0435D8F11E1BA1B20009BDF0 /* PhotoViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewLayout.h; sourceTree = "<group>"; };
 		0435D8F21E1BA1B20009BDF0 /* PhotoViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewLayout.m; sourceTree = "<group>"; };
+		04A167AA1E1F9E5000412D39 /* InvestMentCompanyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestMentCompanyView.h; sourceTree = "<group>"; };
+		04A167AB1E1F9E5000412D39 /* InvestMentCompanyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestMentCompanyView.m; sourceTree = "<group>"; };
+		04A167AD1E1F9EA800412D39 /* InvestmentLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestmentLayout.h; sourceTree = "<group>"; };
+		04A167AE1E1F9EA800412D39 /* InvestmentLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestmentLayout.m; sourceTree = "<group>"; };
+		04A167B01E1FB81500412D39 /* InvestorDescView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestorDescView.h; sourceTree = "<group>"; };
+		04A167B11E1FB81500412D39 /* InvestorDescView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestorDescView.m; sourceTree = "<group>"; };
 		04E4BA331E1DDFE200775D9B /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		04E4BA341E1DDFE200775D9B /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
 		04E4BA361E1DE44700775D9B /* PersonalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalLayout.h; sourceTree = "<group>"; };
@@ -1186,6 +1196,8 @@
 		04E4BA411E1E425300775D9B /* DescCompanyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescCompanyView.m; sourceTree = "<group>"; };
 		04E4BA431E1E765D00775D9B /* JobDetialLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetialLayout.h; sourceTree = "<group>"; };
 		04E4BA441E1E765D00775D9B /* JobDetialLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetialLayout.m; sourceTree = "<group>"; };
+		04FEA0701E1F40630012B764 /* GoodProjectLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodProjectLayout.h; sourceTree = "<group>"; };
+		04FEA0711E1F40630012B764 /* GoodProjectLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodProjectLayout.m; sourceTree = "<group>"; };
 		9E5A841B1E1D327900D12404 /* vent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vent.png; sourceTree = "<group>"; };
 		9E5A841D1E1D342500D12404 /* tb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tb.png; sourceTree = "<group>"; };
 		9E5A841F1E1D349D00D12404 /* hr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hr.png; sourceTree = "<group>"; };
@@ -1886,6 +1898,12 @@
 				0435D6271E1B48540009BDF0 /* InvestorTableViewCell.m */,
 				0435D6281E1B48540009BDF0 /* InvestorThirdTableViewCell.h */,
 				0435D6291E1B48540009BDF0 /* InvestorThirdTableViewCell.m */,
+				04A167AA1E1F9E5000412D39 /* InvestMentCompanyView.h */,
+				04A167AB1E1F9E5000412D39 /* InvestMentCompanyView.m */,
+				04A167B01E1FB81500412D39 /* InvestorDescView.h */,
+				04A167B11E1FB81500412D39 /* InvestorDescView.m */,
+				04A167AD1E1F9EA800412D39 /* InvestmentLayout.h */,
+				04A167AE1E1F9EA800412D39 /* InvestmentLayout.m */,
 			);
 			name = "投资机构";
 			path = "合伙人/投资机构";
@@ -1896,6 +1914,8 @@
 			children = (
 				0435D62B1E1B48540009BDF0 /* GoodDeFirstTableViewCell.h */,
 				0435D62C1E1B48540009BDF0 /* GoodDeFirstTableViewCell.m */,
+				04FEA0701E1F40630012B764 /* GoodProjectLayout.h */,
+				04FEA0711E1F40630012B764 /* GoodProjectLayout.m */,
 				0435D62D1E1B48540009BDF0 /* GoodDeSecondTableViewCell.h */,
 				0435D62E1E1B48540009BDF0 /* GoodDeSecondTableViewCell.m */,
 				0435D62F1E1B48540009BDF0 /* GoodDeThirdTableViewCell.h */,
@@ -3015,6 +3035,7 @@
 				0435D7F91E1B48670009BDF0 /* SDWebImageDecoder.m in Sources */,
 				0435D7C21E1B48670009BDF0 /* NSArray+MASAdditions.m in Sources */,
 				0435D7D11E1B48670009BDF0 /* NSObject+MJCoding.m in Sources */,
+				04FEA0721E1F40630012B764 /* GoodProjectLayout.m in Sources */,
 				0435D7AC1E1B48670009BDF0 /* AFImageDownloader.m in Sources */,
 				0435D65E1E1B48540009BDF0 /* InstiListView.m in Sources */,
 				0435D8D31E1B7BC30009BDF0 /* YHUserInfoManager.m in Sources */,
@@ -3216,6 +3237,7 @@
 				0435D7B81E1B48670009BDF0 /* FMDatabasePool.m in Sources */,
 				0435D88C1E1B7AAF0009BDF0 /* UIImage+Gallop.m in Sources */,
 				0435D7F81E1B48670009BDF0 /* SDWebImageCompat.m in Sources */,
+				04A167AF1E1F9EA800412D39 /* InvestmentLayout.m in Sources */,
 				0435D64C1E1B48540009BDF0 /* HRTableViewCell.m in Sources */,
 				0435D7CF1E1B48670009BDF0 /* MJPropertyType.m in Sources */,
 				0435D8761E1B7AAF0009BDF0 /* LWHTMLNode.m in Sources */,
@@ -3267,6 +3289,7 @@
 				0435D7A81E1B48670009BDF0 /* AFURLSessionManager.m in Sources */,
 				0435D8D21E1B7BC30009BDF0 /* SendLifeController.m in Sources */,
 				0435D8DC1E1B7BC30009BDF0 /* LWAlertView.m in Sources */,
+				04A167B21E1FB81500412D39 /* InvestorDescView.m in Sources */,
 				0435D7B21E1B48670009BDF0 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0435D5EB1E1B484C0009BDF0 /* MessageViewController.m in Sources */,
 				0435D7BA1E1B48670009BDF0 /* FMResultSet.m in Sources */,
@@ -3286,6 +3309,7 @@
 				0435D8F31E1BA1B20009BDF0 /* PhotoViewCell.m in Sources */,
 				0435D87F1E1B7AAF0009BDF0 /* LWTextGlyph.m in Sources */,
 				0435D7D41E1B48670009BDF0 /* NSString+MJExtension.m in Sources */,
+				04A167AC1E1F9E5000412D39 /* InvestMentCompanyView.m in Sources */,
 				0435D5641E1B482F0009BDF0 /* employSecondTableViewCell.m in Sources */,
 				0435D7BF1E1B48670009BDF0 /* MASLayoutConstraint.m in Sources */,
 				0435D6521E1B48540009BDF0 /* InstiPersonTableViewCell.m in Sources */,

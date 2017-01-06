@@ -7,19 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class GoodProjectLayout;
 @interface GoodDeSecondTableViewCell : UITableViewCell
 
-/***/
-@property (strong,nonatomic) UILabel *titleLabel;
+@property (strong,nonatomic) GoodProjectLayout *partnerLayout;
 
-/***/
-@property (strong,nonatomic) UILabel *dateLabel;
-
-/***/
-@property (strong,nonatomic) UILabel *investLabel;
-@property (strong,nonatomic) UILabel *amountLabel;
-@property (strong,nonatomic) UILabel *fundLabel;
 
 
 @end

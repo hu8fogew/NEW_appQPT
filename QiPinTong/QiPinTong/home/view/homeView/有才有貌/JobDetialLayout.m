@@ -34,27 +34,27 @@
         jobSalary.text = @"(全职  5-8k)";
         //地区图片
         LWImageStorage *mapImg = [[LWImageStorage alloc]init];
-        mapImg.frame = CGRectMake(jobKind.left, jobKind.bottom+8, 20, 20);
-        mapImg.contents = [UIImage imageNamed:@""];
+        mapImg.frame = CGRectMake(jobKind.left, jobKind.bottom+8, 15, 15);
+        mapImg.contents = [UIImage imageNamed:@"qpt_map_image"];
         //区域
-        LWTextStorage *mapText = [self createTextWithFrame:CGRectMake(mapImg.right+3, jobKind.bottom+10, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
+        LWTextStorage *mapText = [self createTextWithFrame:CGRectMake(mapImg.right+3, jobKind.bottom+8, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
         mapText.text = @"乌鲁木齐";
         
         //工龄图片
         LWImageStorage *timeImage = [[LWImageStorage alloc]init];
-        timeImage.contents = [UIImage imageNamed:@""];
+        timeImage.contents = [UIImage imageNamed:@"time_image"];
         timeImage.frame = CGRectMake(mapText.right+15, mapImg.top, mapImg.width, mapImg.height);
         //工龄
-        LWTextStorage *workTime = [self createTextWithFrame:CGRectMake(timeImage.right+3, mapText.top, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
+        LWTextStorage *workTime = [self createTextWithFrame:CGRectMake(timeImage.right+4, mapText.top, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
         workTime.text = @"3年";
         
         //学历照片
         LWImageStorage *eduImg =[[LWImageStorage alloc]init];
         eduImg.frame = CGRectMake(workTime.right+15, mapImg.top, mapImg.width, mapImg.height);
-        eduImg.contents = [UIImage imageNamed:@""];
+        eduImg.contents = [UIImage imageNamed:@"acaImgae"];
         
         //学历
-        LWTextStorage *eduText =[self createTextWithFrame:CGRectMake(eduImg.right+3, mapText.top, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
+        LWTextStorage *eduText =[self createTextWithFrame:CGRectMake(eduImg.right+4, mapText.top+1, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
         eduText.text = @"硕士";
         //线
         LWImageStorage *lineF = [[LWImageStorage alloc]init];

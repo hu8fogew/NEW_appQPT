@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class GoodProjectLayout;
 @interface GoodDeFirstTableViewCell : UITableViewCell
+
+@property (strong,nonatomic) GoodProjectLayout *projectLayout;
 
 @property (strong,nonatomic) UILabel *titleLabel;
 

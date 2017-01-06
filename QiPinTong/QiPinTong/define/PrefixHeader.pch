@@ -149,7 +149,9 @@
 #import "InvestorSecondTableViewCell.h"
 #import "InvestorThirdTableViewCell.h"
 #import "InvestorTableViewCell.h"
+#import "InvestmentLayout.h"
 
+#import "GoodProjectLayout.h"
 
 /**
  *  个人

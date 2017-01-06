@@ -107,67 +107,20 @@ id goodCell = nil;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return 3;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    if (indexPath.row == 0) {
-        return SCREEN_WIDTH*0.52;
-
-    }
-    else if (indexPath.row == 1){
-        
-        return SCREEN_WIDTH*0.18;
-
-    }
-    else{
-        return SCREEN_WIDTH*0.18;
-
-    }
+    GoodProjectLayout *jectLayout = [[GoodProjectLayout alloc]initWellProjectCell];
+    return jectLayout.projectCellHeight;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"identifier";
-    if (indexPath.row == 0) {
-        GoodDeFirstTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            cell = [[GoodDeFirstTableViewCell alloc]initWithFrame:cell.bounds];
-            goodCell = cell;
-            cell.titleLabel.text = @"项目详情";
-            cell.detailLabel.text = @"先到吉他谱网站里面找自己喜欢的歌曲，没有简单和复杂之分，爱哪首选择哪一首，为了交流方便（主要是我太懒，呵呵），这里选择了《兰花草》，实际上也可以在街上买吉他弹唱的书，里面的东西都一样，只要曲谱中有和弦标记就可以了（也dd就是下面图中的Am、Em等类似标记的）点击录制，当木鱼节奏敲四下后（也就是一小节的准备时间），开始按照曲谱中的和弦进行录制，本例中是第一小节点Am，第二小节先点Em再点Am，第三小节点Am，第四、第五小节因为还是Am可以不点，第六小姐诶点Em，以此类推，直至最后一个小节，点击位置见图例。如果错了可以从第一步点击“退回按钮”重新来过。记住：不要怕偶然的失败，熟能生巧哦";
-        }
-        return cell;
-        
-    }
-    else if (indexPath.row == 1){
-            GoodDeSecondTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[GoodDeSecondTableViewCell alloc]initWithFrame:cell.bounds];
-        goodCell = cell;
-        cell.titleLabel.text = @"融资历史";
-        cell.dateLabel.text = @"2015年11月";
-        cell.investLabel.text = @"种子轮";
-        cell.amountLabel.text = @"200万人民币";
-        cell.fundLabel.text = @"银江资本";
-    }
+    
+    GoodDeFirstTableViewCell *cell = [[GoodDeFirstTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    
     return cell;
-        
-    }
-    else{
-
-    GoodDeThirdTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[GoodDeThirdTableViewCell alloc]initWithFrame:cell.bounds];
-        goodCell = cell;
-        cell.titleLabel.text = @"融资历史";
-        
-    }
-    return cell;
-        
-    }
-
-    return goodCell;
 
 }
 

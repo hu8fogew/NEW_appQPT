@@ -7,9 +7,17 @@
 //
 
 #import "GoodDeFirstTableViewCell.h"
+@interface GoodDeFirstTableViewCell()
+
+
+@property(nonatomic,strong)LWAsyncDisplayView *asycView;
+
+@end
+
+
 
 @implementation GoodDeFirstTableViewCell
-
+/*
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -43,6 +51,60 @@
     }
     return self;
 }
+*/
+
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        self.backgroundColor = [UIColor whiteColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self.contentView addSubview:self.asycView];
+        
+    }
+    return self;
+}
+
+
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.asycView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.projectLayout.projectCellHeight);
+}
+
+
+
+-(LWAsyncDisplayView *)asycView
+{
+    if (!_asycView) {
+        _asycView = [[LWAsyncDisplayView alloc]initWithFrame:CGRectZero];
+        
+    }
+    
+    return _asycView;
+}
+
+
+-(GoodProjectLayout *)projectLayout
+{
+    if (!_projectLayout) {
+        _projectLayout = [[GoodProjectLayout alloc]initWellProjectCell];
+        self.asycView.layout = self.projectLayout;
+    }
+    return _projectLayout;
+}
+
+
+
+
+
+
+
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

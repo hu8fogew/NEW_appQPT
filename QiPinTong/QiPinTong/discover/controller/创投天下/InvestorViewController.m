@@ -8,6 +8,8 @@
 
 #import "InvestorViewController.h"
 
+#import "InvestorDescView.h"
+
 @interface InvestorViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 /**tableview的headerview*/
@@ -15,6 +17,8 @@
 
 /**tableview*/
 @property (strong,nonatomic) UITableView *tableView;
+
+@property(nonatomic,strong) InvestorDescView *descView;
 
 /*底部按钮视图*/
 @property (strong,nonatomic) UIView *bottomView;
@@ -25,12 +29,23 @@
 
 id investCell = nil;
 
+-(InvestorDescView *)descView
+{
+    if (!_descView) {
+        InvestmentLayout *lay = [[InvestmentLayout alloc]initInvestmentPersonDescView];
+        _descView = [[InvestorDescView alloc]initWithFrame:CGRectMake(0, self.headerView.botoom, SCREEN_WIDTH, lay.investorViewHeight)];
+        
+    }
+    return _descView;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.tableView];
-    
+    [self.headerView addSubview:self.descView];
     [self.view addSubview:self.bottomView];
 }
 
@@ -98,7 +113,7 @@ id investCell = nil;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.headerView;
-        _tableView.tableHeaderView.height = self.headerView.height;
+        _tableView.tableHeaderView.height = self.descView.botoom;
         
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
@@ -110,78 +125,17 @@ id investCell = nil;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 0) {
-        
-        return SCREEN_WIDTH*0.52;
-        
-    }
-    else if (indexPath.row == 1){
-        
-        return SCREEN_WIDTH*0.23;
-    }
-    
-    else if (indexPath.row == 2){
-        
-        return SCREEN_WIDTH*0.54;
-    }
-    else{
+   
         return SCREEN_WIDTH*0.3;
-    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"identifier";
-    if (indexPath.row == 0) {
-        GoodDeFirstTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            cell = [[GoodDeFirstTableViewCell alloc]initWithFrame:cell.bounds];
-            investCell = cell;
-            cell.titleLabel.text = @"个人简介";
-            cell.detailLabel.text = @"先到吉他谱网站里面找自己喜欢的歌曲，没有简单和复杂之分，爱哪首选择哪一首，为了交流方便（主要是我太懒，呵呵），这里选择了《兰花草》，实际上也可以在街上买吉他弹唱的书，里面的东西都一样，只要曲谱中有和弦标记就可以了（也dd就是下面图中的Am、Em等类似标记的）点击录制，当木鱼节奏敲四下后（也就是一小节的准备时间），开始按照曲谱中的和弦进行录制，本例中是第一小节点Am，第二小节先点Em再点Am，第三小节点Am，第四、第五小节因为还是Am可以不点，第六小姐诶点Em，以此类推，直至最后一个小节，点击位置见图例。如果错了可以从第一步点击“退回按钮”重新来过。记住：不要怕偶然的失败，熟能生巧哦";
-        }
-        
-        return cell;
-        
-    }
-    
-    else if (indexPath.row == 1){
-        InvestorSecondTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            cell = [[InvestorSecondTableViewCell alloc]initWithFrame:cell.bounds];
-            investCell = cell;
-            cell.titleLabel.text = @"我的优势";
-            cell.detailLabel.text = @"寻求志同道合人士，携手共赢天下始按照曲谱中的和弦进行录制，本例中是第一小节点Am，第二小节先点Em再点Am，第三小节点Am，第四、第五小节因";
-            
-        }
-        
-        return cell;
-        
-    }
-    
-    else if (indexPath.row == 2){
-        InvestorThirdTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            cell = [[InvestorThirdTableViewCell alloc]initWithFrame:cell.bounds];
-            investCell = cell;
-            cell.titleLabel.text = @"投资偏好";
-            cell.fieldLabel.text = @"关注领域";
-            cell.fiDetialLabel.text = @"社交网络/文娱体育/汽车交通/艺术人生";
-            cell.stageLabel.text = @"投资阶段";
-            cell.stDetailLabel.text = @"种子轮/天使轮/A轮";
-            cell.amountLabel.text = @"单笔投额";
-            cell.amDetailLabel.text = @"20w-500w人民币";
-            cell.addressLabel.text = @"关注地区";
-            cell.addDetailLabel.text = @"上海/西安";
-            
-        }
-        return cell;
-    }
-    else{
         InvestorTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[InvestorTableViewCell alloc]initWithFrame:cell.bounds];
@@ -195,11 +149,7 @@ id investCell = nil;
             
             [cell.arrowIcon setImage:[UIImage imageNamed:@"rightImage"] forState:UIControlStateNormal];
             [cell.arrowIcon addTarget:self action:@selector(clickArrowBtn) forControlEvents:UIControlEventTouchUpInside];
-            
         }
-        return cell;
-    }
-    
     return investCell;
 }
 

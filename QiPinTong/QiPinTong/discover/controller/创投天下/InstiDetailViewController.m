@@ -8,6 +8,8 @@
 
 #import "InstiDetailViewController.h"
 
+#import "InvestMentCompanyView.h"
+
 @interface InstiDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 /**tableview的headerview*/
@@ -21,6 +23,8 @@
 
 /**详情视图*/
 @property (strong,nonatomic) UIView *detailView;
+
+@property(nonatomic,strong) InvestMentCompanyView *descDetailView;
 
 /**列表视图*/
 @property (strong,nonatomic) UIView *firstListView;
@@ -46,9 +50,7 @@ id inCell = nil;
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.bottomView];
     
-    [self.headerView addSubview:self.detailView];
-    [self.headerView addSubview:self.firstListView];
-    [self.headerView addSubview:self.secondListView];
+    [self.headerView addSubview:self.descDetailView];
     [self.headerView addSubview:self.selectBtnView];
     
     
@@ -71,6 +73,20 @@ id inCell = nil;
     }
     return _headerView;
 }
+
+-(InvestMentCompanyView *)descDetailView
+{
+    if (!_descDetailView) {
+        
+        InvestmentLayout *lay = [[InvestmentLayout alloc]initInvestmentDescView];
+        
+        _descDetailView = [[InvestMentCompanyView alloc]initWithFrame:CGRectMake(0, self.headerView.botoom, SCREEN_WIDTH, lay.investmentViewHeight)];
+        
+    }
+    return _descDetailView;
+}
+
+
 
 -(UIView *)detailView{
     if (!_detailView) {
@@ -111,8 +127,7 @@ id inCell = nil;
     if (!_firstListView) {
         _firstListView = [[UIView alloc]initWithFrame:CGRectMake(0, self.detailView.y+self.detailView.height, SCREEN_WIDTH, SCREEN_WIDTH*0.18)];
         GoodDeSecondTableViewCell *vi = [GoodDeSecondTableViewCell new];
-        vi.titleLabel.text = @"投资阶段";
-        vi.dateLabel.text = @"种子轮 / 天使轮 / A轮dd / B轮";
+
         [_firstListView addSubview:vi];
 
     }
@@ -123,8 +138,7 @@ id inCell = nil;
     if (!_secondListView) {
         _secondListView = [[UIView alloc]initWithFrame:CGRectMake(0, self.firstListView.y+self.firstListView.height, SCREEN_WIDTH, SCREEN_WIDTH*0.18)];
         GoodDeSecondTableViewCell *vi = [GoodDeSecondTableViewCell new];
-        vi.titleLabel.text = @"投资领域";
-        vi.dateLabel.text = @"移动互联网 / 媒体资讯 / 移动互联网 / 媒体资讯";
+
         [_secondListView addSubview:vi];
 
     }
@@ -134,7 +148,7 @@ id inCell = nil;
 
 -(UIView *)selectBtnView{
     if (!_selectBtnView) {
-        _selectBtnView = [[UIView alloc]initWithFrame:CGRectMake(0, self.secondListView.y+self.secondListView.height, SCREEN_WIDTH, 40)];
+        _selectBtnView = [[UIView alloc]initWithFrame:CGRectMake(0, self.descDetailView.botoom, SCREEN_WIDTH, 40)];
         _selectBtnView.backgroundColor = HWColor(241, 241, 241);
        
         UIView *vi1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, 39)];
@@ -255,7 +269,7 @@ id inCell = nil;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.headerView;
-        _tableView.tableHeaderView.height = self.headerView.height+self.detailView.height+self.firstListView.height+self.secondListView.height+self.selectBtnView.height;
+        _tableView.tableHeaderView.height = self.selectBtnView.botoom;
         
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
