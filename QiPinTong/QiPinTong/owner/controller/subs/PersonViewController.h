@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MemberCenterViewController : UIViewController
+@interface PersonViewController : UIViewController
 
 @end

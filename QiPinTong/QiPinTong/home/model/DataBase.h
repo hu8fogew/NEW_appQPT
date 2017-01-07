@@ -33,4 +33,7 @@
 //广告
 +(NSMutableArray *)addAdverArray;
 
+//个人中心
++(NSMutableArray *)addPersonSelectBarArr;
+
 @end

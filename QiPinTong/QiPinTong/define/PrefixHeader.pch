@@ -157,6 +157,16 @@
  *  个人
  */
 #import "OwnerViewController.h"
+#import "CompanyViewController.h"
+#import "PersonViewController.h"
+#import "RegisterViewController.h"
+#import "RetrievePwdViewController.h"
+#import "CompanyShowView.h"
+#import "HeaderView.h"
+#import "OwnerMainTableViewCell.h"
+#import "PersonShowView.h"
+#import "RegisterTableViewCell.h"
+#import "RetrievePwdTableViewCell.h"
 
 
 /**

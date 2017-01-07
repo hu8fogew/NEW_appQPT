@@ -22,7 +22,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self createTableView];
+    [self.view addSubview:self.tableView];
     
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
@@ -36,18 +36,23 @@
     }
 }
 
--(void)createTableView{
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Kwidth, Kheight) style:UITableViewStyleGrouped];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    [self.view addSubview:_tableView];
-    
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        
+        //_tableView.backgroundColor =  HWColor(235, 241, 247);
+        
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    }
+    
+    return _tableView;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -60,13 +65,16 @@
             rows = 1;
             break;
         case 1:
-            rows = 3;
+            rows = 2;
             break;
         case 2:
-            rows = 3;
+            rows = 2;
+            break;
+        case 3:
+            rows = 2;
             break;
         default:
-            rows = 1;
+            rows = 2;
             break;
     }
     
@@ -76,7 +84,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 10;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -97,7 +105,6 @@
     DiscoverTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mycell"];
     if (cell == nil) {
         cell = [[DiscoverTableViewCell alloc]initWithFrame:cell.bounds];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = NO;
        }
 
@@ -108,15 +115,11 @@
     else if (section == 1) {
         if (row == 0) {
             cell.icon.image = [UIImage imageNamed:@"sk_image"];
-            cell.title.text = @"有商有客";
+            cell.title.text = @"生活圈";
         }
-        else if (row == 1) {
+        else {
             cell.icon.image = [UIImage imageNamed:@"icon_image"];
             cell.title.text = @"抢通币";
-        }
-        else{
-            cell.icon.image = [UIImage imageNamed:@"venture_image"];
-            cell.title.text = @"创投地带";
         }
        
     }
@@ -126,20 +129,31 @@
             cell.title.text = @"家长界";
             
         }
-        else if (row == 1) {
-            cell.icon.image = [UIImage imageNamed:@"soldier_image"];
-            cell.title.text = @"军人本色";
-            
-        }
         else{
-            cell.icon.image = [UIImage imageNamed:@"hr_image"];
-            cell.title.text = @"HR Home";
+            cell.icon.image = [UIImage imageNamed:@"venture_image"];
+            cell.title.text = @"创孵天下";
         }
        
     }
     else if (section == 3) {
-        cell.icon.image = [UIImage imageNamed:@"book_image"];
-        cell.title.text = @"通讯录";
+        if (indexPath.row == 0) {
+            cell.icon.image = [UIImage imageNamed:@"book_image"];
+            cell.title.text = @"达人帮";
+        }
+      else{
+            cell.icon.image = [UIImage imageNamed:@"hr_image"];
+            cell.title.text = @"HR Home";
+        }
+    }
+    else{
+        if (indexPath.row == 0) {
+            cell.icon.image = [UIImage imageNamed:@"易通学院"];
+            cell.title.text = @"易通学院";
+        }
+        else{
+            cell.icon.image = [UIImage imageNamed:@"sk_image"];
+            cell.title.text = @"公益同行";
+        }
     }
     
     return cell;
@@ -164,39 +178,60 @@
     //朋友圈
     MomentsViewController *circleVc = [MomentsViewController new];
     
+    YTXYViewController *ytxyVC = [YTXYViewController new];
+    
     switch (section) {
             //朋友圈
-        case 0:
-        {
+        case 0:{
             [self.navigationController pushViewController:circleVc animated:YES];
-        }
+            }
             break;
+            
         case 1:
             switch (row) {
                case 0:
                     [self.navigationController pushViewController:ysykVC animated:YES];
                     break;
-               case 1:
+               default:
                     [self.navigationController pushViewController:coinVC animated:YES];
-                    break;
-                default:
-                    [self.navigationController pushViewController:ventureVC animated:YES];
                     break;
             }
             break;
+            
         case 2:
             switch (row) {
                 case 0:
                     
                     break;
-                 case 1:
-                    break;
                 
                 default:
-                    [self.navigationController pushViewController:hrVC animated:YES];
+                    [self.navigationController pushViewController:ventureVC animated:YES];
                     break;
             }
+            break;
+            
+        case 3:
+            switch (row) {
+                case 0:
+                    
+                    break;
+                    
+                default:
+                     [self.navigationController pushViewController:hrVC animated:YES];
+                    break;
+            }
+            break;
+            
         default:
+            switch (row) {
+                case 0:
+                    [self.navigationController pushViewController:ytxyVC animated:YES];
+                    break;
+                    
+                default:
+                   
+                    break;
+            }
             
             break;
     }

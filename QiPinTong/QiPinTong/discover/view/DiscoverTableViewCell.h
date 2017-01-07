@@ -14,5 +14,6 @@
 
 @property (strong,nonatomic) UILabel *title;
 
+@property (strong,nonatomic) UIImageView *arrowIcon;
 
 @end

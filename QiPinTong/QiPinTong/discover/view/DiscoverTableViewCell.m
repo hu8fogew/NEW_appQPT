@@ -13,7 +13,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 49)];
         vi.backgroundColor = [UIColor whiteColor];
         [self addSubview:vi];
         
@@ -33,6 +33,19 @@
             make.left.equalTo(self.icon.mas_right).with.offset(10);
             make.centerY.equalTo(vi);
         }];
+        
+        self.arrowIcon = [UIImageView new];
+        self.arrowIcon.image = [UIImage imageNamed:@"rightImage"];
+        [vi addSubview:self.arrowIcon];
+        [self.arrowIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(vi);
+            make.right.equalTo(vi).with.offset(-15);
+            make.size.mas_equalTo(CGSizeMake(18, 18));
+        }];
+        
+        UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 1)];
+        vv.backgroundColor = HWColor(235, 241, 247);
+        [self addSubview:vv];
     }
     return self;
 }

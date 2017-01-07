@@ -178,14 +178,14 @@
     
 }
 
-#pragma mark -----tableView及方法------
+#pragma mark /*-----tableView及方法------*/
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.tableHeaderView = self.headerView;
-        _tableView.tableHeaderView.height = self.headerView.height+self.selectBtnView.height;
+        _tableView.tableHeaderView.height = self.selectBtnView.y+self.selectBtnView.height;
     }
     return _tableView;
 }

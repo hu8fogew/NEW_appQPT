@@ -214,4 +214,55 @@
     return [arr copy];
     
 }
+
++(NSMutableArray *)addPersonSelectBarArr{
+    NSMutableArray *arr = [NSMutableArray array];
+    NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"items_image",@"slecteImg",
+                          @"PMS",@"labTitle",
+                          
+                          nil];
+    
+    NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"partner_image",@"slecteImg",
+                          @"大人帮",@"labTitle",
+                          
+                          nil];
+    
+    NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"insitu_image",@"slecteImg",
+                          @"有才有貌",@"labTitle",
+                          
+                          nil];
+    
+    NSDictionary *dic4 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"items_image",@"slecteImg",
+                          @"家长界",@"labTitle",
+                          
+                          nil];
+    
+    NSDictionary *dic5 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"partner_image",@"slecteImg",
+                          @"抢通币",@"labTitle",
+                          
+                          nil];
+    
+    NSDictionary *dic6 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"insitu_image",@"slecteImg",
+                          @"我要创业",@"labTitle",
+                          
+                          nil];
+    
+    [arr addObject:dic1];
+    [arr addObject:dic2];
+    [arr addObject:dic3];
+    [arr addObject:dic4];
+    [arr addObject:dic5];
+    [arr addObject:dic6];
+    
+    return [arr copy];
+    
+}
+
+
 @end
