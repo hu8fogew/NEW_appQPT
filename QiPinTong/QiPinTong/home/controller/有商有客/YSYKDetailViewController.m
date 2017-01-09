@@ -7,8 +7,8 @@
 //
 
 #import "YSYKDetailViewController.h"
-
-@interface YSYKDetailViewController ()<UITableViewDelegate,UITableViewDataSource,WYAutoCaruselDelegate>
+#import "YSYKCommentController.h"
+@interface YSYKDetailViewController ()<UITableViewDelegate,UITableViewDataSource,WYAutoCaruselDelegate,YSYKDetialDelegate>
 
 /*tableView*/
 @property (nonatomic,strong) UITableView *tableView;
@@ -26,10 +26,10 @@
 @property (strong,nonatomic) UIView *showView;
 
 /*列表视图*/
-@property (strong,nonatomic) UIView *listView;
+@property (strong,nonatomic) YSYKListView *listView;
 
 /**/
-@property (strong,nonatomic) UIView *detailView;
+@property (strong,nonatomic) YSYKDetailView *detailView;
 
 @property (strong,nonatomic) UIView *TlistView;
 
@@ -98,51 +98,34 @@
 }
 
 #pragma mark /-----列表视图-----/
--(UIView *)listView{
+-(YSYKListView *)listView{
     if (!_listView) {
-        _listView = [[UIView alloc]initWithFrame:CGRectMake(0, self.showView.y+self.showView.height, SCREEN_WIDTH, SCREEN_WIDTH*0.46)];
-        _listView.backgroundColor = HWColor(241, 241, 241);
-        YSYKListView *vi = [[YSYKListView alloc]initWithFrame:_listView.bounds];
-        [vi.addressIcon addTarget:self action:@selector(clickAddress) forControlEvents:UIControlEventTouchUpInside];
-        vi.addressLabel.text = @"西安市南三环i都会逸翠园";
-        [vi.naviIcon addTarget:self action:@selector(naviClick) forControlEvents:UIControlEventTouchUpInside];
-        vi.phoneNoLabel.text = @"029-88888888";
-        vi.urlLabel.text = @"http://mob.qipintong.com";
-        
-        [_listView addSubview:vi];
+        YSYKLayout *lay = [[YSYKLayout alloc]initListViewDetialView];
+        _listView = [[YSYKListView alloc]initWithFrame:CGRectMake(0, self.showView.botoom, SCREEN_WIDTH, lay.listViewHeight)];
     }
     return _listView;
 }
 
--(void)clickAddress{
-    HWLog(@"地址");
-}
-
--(void)naviClick{
-    HWLog(@"导航");
-}
 
 #pragma mark /-----详情视图-----/
--(UIView *)detailView{
+-(YSYKDetailView *)detailView{
     if (!_detailView) {
-        _detailView = [[UIView alloc]initWithFrame:CGRectMake(0, self.listView.y+self.listView.height, SCREEN_WIDTH, SCREEN_WIDTH*0.54)];
-        _detailView.backgroundColor = HWColor(241, 241, 241);
-        YSYKDetailView *vi = [[YSYKDetailView alloc]initWithFrame:_detailView.bounds];
-        vi.commentLabel.text = @"全部评价(66)";
-        [vi.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        vi.imgView.image = [UIImage imageNamed:@"mq_image.jpeg"];
-        vi.titleLabel.text = @"sinmonwan";
-        vi.timeLabel.text = @"2016-08-23 19:00";
-        vi.detailLabel.text = @"字体颜色设置：（背景和字体颜色）WM_DRAWITEM消息处理函数：void CTest_Dlg::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct){// TODO: Add your message handler code here and/or call defaultif (nIDCtl==IDC_BTN_COLOR)         //checking for the button{//改变按钮字体和背景颜色";
-    
-        [_detailView addSubview:vi];
+        
+        YSYKLayout *lay = [[YSYKLayout alloc]initCommentView];
+        _detailView = [[YSYKDetailView alloc]initWithFrame:CGRectMake(0, self.listView.y+self.listView.height, SCREEN_WIDTH, lay.commentViewHeight)];
+        _detailView.delegate = self;
     }
     return _detailView;
 }
 
--(void)moreBtnClick{
-    HWLog(@"更多");
+#pragma mark ------更多评论
+-(void)moreCommentOfView
+{
+    YSYKCommentController *comment = [YSYKCommentController new];
+    [self.navigationController pushViewController:comment animated:YES];
 }
+
+
 
 -(UIView *)TlistView{
     if (!_TlistView) {

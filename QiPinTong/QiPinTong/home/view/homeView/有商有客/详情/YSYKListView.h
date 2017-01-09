@@ -8,19 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class YSYKLayout;
 @interface YSYKListView : UIView
 
-@property (strong,nonatomic) UIButton *addressIcon;
-@property (strong,nonatomic) UILabel *addressLabel;
-
-@property (strong,nonatomic) UIButton *naviIcon;
-@property (strong,nonatomic) UILabel *naviLabel;
-
-@property (strong,nonatomic) UIImageView *phoneIcon;
-@property (strong,nonatomic) UILabel *phoneNoLabel;
-
-@property (strong,nonatomic) UIImageView *homeIcon;
-@property (strong,nonatomic) UILabel *urlLabel;
-
+@property(nonatomic,strong) YSYKLayout *listViewLayout;
 
 @end

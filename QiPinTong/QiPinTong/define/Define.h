@@ -12,6 +12,23 @@
 #define Kwidth self.view.frame.size.width
 #define Kheight self.view.frame.size.height
 #define  NewsPath @"http://c.m.163.com/nc/video/home/%zd-10.html"
+
+/*字体尺寸*/
+//主标题大小
+#define MTitleSize [[StringSizeManager shareStringManager] mTitleSize]
+//副标题大小
+#define subTitleSize [[StringSizeManager shareStringManager] suTitleSize]
+
+
+
+/*视图尺寸*/
+//搜索框高度
+#define searchHeight [[StringSizeManager shareStringManager] searchBarSize]
+//轮播高度
+#define LBHeight [[StringSizeManager shareStringManager] lunboSize]
+//选择按钮
+#define seleBarHeight [[StringSizeManager shareStringManager] seleButtonSize]
+
 /*家长课堂的cell高度*/
 #define ParentCellHeight 130
 /*cell之间的间距*/
@@ -69,7 +86,10 @@
 #define MainColor HWColor(53.0f, 53.0f, 53.0f)
 //父文本颜色
 #define SecondTitleColor HWColor(153.0f, 153.0f, 153.0f)
-
+//白色
+#define whiteC [UIColor whiteColor]
+//透明
+#define clearC [UIColor clearColor]
 
 // 随机色
 #define HWRandomColor HWColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))

@@ -27,6 +27,12 @@
     return self;
 }
 
+-(void)lwAsyncDisplayView:(LWAsyncDisplayView *)asyncDisplayView didCilickedTextStorage:(LWTextStorage *)textStorage linkdata:(id)data
+{
+    HWLog(@"%@",data);
+}
+
+
 
 -(void)layoutSubviews
 {

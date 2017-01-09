@@ -87,6 +87,9 @@
 #import "YSYKDetailView.h"
 #import "MSTDViewController.h"
 #import "XXYLViewController.h"
+#import "YSYKLayout.h"
+#import "YSYKCommentController.h"
+#import "YSYKCommentCell.h"
 
 /**易通学院*/
 #import "YTXYViewController.h"
@@ -189,6 +192,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UILabel+LinesDistance.h"
 //#import "LWTextStorage+TextStroage.h"
+#import "UIDevice+FEPlatForm.h"
+#import "StringSizeManager.h"
 /**
  *  其他
  */

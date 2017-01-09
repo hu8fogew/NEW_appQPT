@@ -96,6 +96,7 @@
         //连接
         LWTextStorage *netText = [self createTextWithFrame:CGRectMake(netImage.right+3, netImage.top, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:mainTitleSize-1];
         netText.text = @"www.baidu.com";
+        [netText lw_addLinkWithData:netText.text range:NSMakeRange(0, netText.text.length) linkColor:SecondTitleColor highLightColor:clearC];
         //线
         LWImageStorage *lineFo = [[LWImageStorage alloc]init];
         lineFo.contents = [UIImage imageNamed:@"line_icon_image"];
@@ -109,6 +110,7 @@
         //办公楼名称
         LWTextStorage *workNameText = [self createTextWithFrame:CGRectMake(hoseImage.right, hoseImage.top, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
         workNameText.text = @"西安市雁塔区永松路2号紫薇花园";
+        [workNameText lw_addLinkWithData:workNameText.text range:NSMakeRange(0, workNameText.text.length) linkColor:SecondTitleColor highLightColor:clearC];
         //线
         LWImageStorage *lineFv = [[LWImageStorage alloc]init];
         lineFv.contents = [UIImage imageNamed:@"line_icon_image"];
@@ -123,6 +125,8 @@
         LWTextStorage *earaText = [self createTextWithFrame:CGRectMake(mapDetailImage.right+3, mapDetailImage.top+2, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
         
         earaText.text = @"西安市雁塔区吉祥路76号永兴大厦2号楼";
+        [earaText lw_addLinkWithData:earaText.text range:NSMakeRange(0, earaText.text.length) linkColor:SecondTitleColor highLightColor:clearC];
+        
         //线
         LWImageStorage *lineSx = [[LWImageStorage alloc]init];
         lineSx.contents = [UIImage imageNamed:@"line_icon_image"];

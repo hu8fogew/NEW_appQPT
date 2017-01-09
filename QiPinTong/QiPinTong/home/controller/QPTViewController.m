@@ -83,7 +83,11 @@ id collectCell = nil;
     [super viewDidLoad];
     
     self.navigationItem.title = @"企聘通";
+    NSString *str = [UIDevice devicePlatForm];
+    HWLog(@"%@",str);
     
+    
+    HWLog(@"========%f",MTitleSize);
     [self.view addSubview:self.QptTable];
     [self.qptHeaderView addSubview:self.searchView];
     [self.qptHeaderView addSubview:self.selectBtnView];

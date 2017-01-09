@@ -7,26 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@class YSYKLayout,YSYKDetailView;
+
+@protocol YSYKDetialDelegate <NSObject>
+
+-(void)moreCommentOfView;
+
+@end
+
+
 
 @interface YSYKDetailView : UIView
 
-/*评价*/
-@property (strong,nonatomic) UILabel *commentLabel;
+@property(nonatomic,strong)YSYKLayout *ysykLayout;
 
-/*查看全部*/
-@property (strong,nonatomic) UIButton *moreBtn;
-
-/*图像*/
-@property (strong,nonatomic) UIImageView *imgView;
-
-/*名称*/
-@property (strong,nonatomic) UILabel *titleLabel;
-
-/*时间*/
-@property (strong,nonatomic) UILabel *timeLabel;
-
-/*详情*/
-@property (strong,nonatomic) UILabel *detailLabel;
-
+@property(nonatomic,assign)id <YSYKDetialDelegate> delegate;
 
 @end
