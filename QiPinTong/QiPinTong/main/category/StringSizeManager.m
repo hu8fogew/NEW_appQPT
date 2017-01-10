@@ -170,6 +170,20 @@
     return a;
 }
 
-
+//切换按钮的高度
+-(CGFloat)segumentSize
+{
+    CGFloat a = 14.0f;
+    if (self.ipone5) {
+        a= 13.0f;
+    }
+    if (self.iphone76) {
+        a = 14.0f;
+    }
+    if (self.iphone76Plus) {
+        a = 15.0f;
+    }
+    return a;
+}
 
 @end

@@ -20,8 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
-    
     self.navigationItem.title = @"我的信息";
     
     [self.navigationController.navigationBar setBarTintColor:HWColor(78, 181, 233)];
@@ -40,10 +38,6 @@
     [self.view addSubview:_tableView];
     
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    UINib *nib = [UINib nibWithNibName:@"MessageTableViewCell" bundle:nil];
-    [_tableView registerNib:nib forCellReuseIdentifier:@"MessageTableViewCell"];
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -52,33 +46,35 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return SCREEN_WIDTH*0.2;
+    MessageLayout *lay = [[MessageLayout alloc]initMessageCell];
+    
+    return lay.messageCellHeight;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *identifier = @"identifier";
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[MessageTableViewCell alloc]initWithFrame:cell.bounds];
-        cell.imgView.image = [UIImage imageNamed:@"mq_image.jpeg"];
-        cell.nameLabel.text = @"苗仔YoYo😯";
-        cell.titleLabel.text = @"你从哪里来";
-        cell.timeLabel.text = @"11:23";
+        cell = [[MessageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
- 
-    
     return cell;
 }
 
-//-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//}
-//
-//-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    return @"删除";
-//}
+
+//cell的点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HWLog(@"%zd",indexPath.row);
+    
+    ChatViewController *vc = [ChatViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {

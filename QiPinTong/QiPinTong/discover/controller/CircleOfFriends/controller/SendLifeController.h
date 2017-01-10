@@ -8,8 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SendLifeController : UIViewController
+#import "LQPhotoPickerViewController.h"
+
+@interface SendLifeController :LQPhotoPickerViewController
 
 @property(nonatomic,copy)NSString *editingType;
+
+@property(nonatomic,strong) UIView *noteTextBackgroudView;
+//备注
+@property(nonatomic,strong) UITextView *noteTextView;
+
+//文字个数提示label
+@property(nonatomic,strong) UILabel *textNumberLabel;
+
+//文字说明
+@property(nonatomic,strong) UILabel *explainLabel;
+
+//提交按钮
+@property(nonatomic,strong) UIButton *submitBtn;
+
 
 @end

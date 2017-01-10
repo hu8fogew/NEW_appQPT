@@ -7,36 +7,61 @@
 //
 
 #import "SendLifeController.h"
-#import "DSTextView.h"
-#import "DSComposeToolbar.h"
 
 #define SourceCompose @"compose"
 #define SourceComment @"comment"
-@interface SendLifeController ()<DSComposeToolbarDelegate,UITextViewDelegate>
+@interface SendLifeController ()<UITextViewDelegate,LQPhotoPickerViewDelegate>
+{
+    
+    //备注文本View高度
+    float noteTextHeight;
+    
+    float pickerViewHeight;
+    float allViewHeight;
+    
+}
 
-//底部选项按钮
-@property(nonatomic,strong)DSComposeToolbar *toolBar;
-//输入view
-@property(nonatomic,strong)DSTextView *editView;
+@property(nonatomic,strong)UIScrollView *scrollView;
 
 //是否正在切换键盘
 @property (nonatomic ,assign, getter=isChangingKeyboard) BOOL ChangingKeyboard;
 
+
+
+
 @end
 
 @implementation SendLifeController
+//scrollview
+-(UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+        _scrollView.backgroundColor = [UIColor whiteColor];
+    }
+    return _scrollView;
+}
+
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     //设置导航
     [self setupNavigationItem];
+    [self.view addSubview:self.scrollView];
+    self.LQPhotoPicker_superView = _scrollView;
     
-    //设置底部toolBar
-    [self.view addSubview:self.toolBar];
-    //设置编辑框
-    [self.view addSubview:self.editView];
+    self.LQPhotoPicker_imgMaxCount = 10;
     
+    [self LQPhotoPicker_initPickerView];
+    
+    self.LQPhotoPicker_delegate = self;
+    
+    
+    [self createView];
     
     HWLog(@"%@",self.editingType);
     
@@ -86,137 +111,191 @@
     
 }
 
-#pragma mark -------------setEditingTextView
 
--(DSComposeToolbar *)toolBar
-{
-    if (!_toolBar) {
-        _toolBar = [[DSComposeToolbar alloc]init];
-        _toolBar.width = self.view.width;
-        _toolBar.height = 44;
-        _toolBar.delegate = self;
-        
-        _toolBar.y = self.view.height - _toolBar.height;
-    }
-    return _toolBar;
+
+
+- (void)createView {
+    //收起键盘
+    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
+    tapGr.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGr];
+    /**
+     *  依次设置
+     */
+    [self initViews];
 }
 
-
-#pragma mark -------toolBarDelegate
--(void)composeTool:(DSComposeToolbar *)toolbar didClickedButton:(DSComposeToolbarButtonType)buttonType
-{
-    switch (buttonType) {
-        case DSComposeToolbarButtonTypeCamera: // 照相机
-//            [self openCamera];
-            HWLog(@"照相机");
-            break;
-            
-        case DSComposeToolbarButtonTypePicture: // 相册
-//            [self openAlbum];
-            HWLog(@"相册");
-            break;
-            
-        case DSComposeToolbarButtonTypeEmotion: // 表情
-//            [self openEmotion];
-            HWLog(@"表情");
-            break;
-            
-        default:
-            break;
-    }
-}
-
-
-#pragma mark ----------setingEditingView
--(DSTextView *)editView
-{
-    if (!_editView) {
-        _editView = [[DSTextView alloc]init];
-        _editView.alwaysBounceVertical = YES ;//垂直方向上有弹簧效果
-        _editView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
-        _editView.delegate = self;
-        // 2.设置提醒文字
-        _editView.placeholder = @"请输入您要编辑的内容 . . .";
-        
-        // 3.设置字体
-        _editView.font = [UIFont systemFontOfSize:15];
-        
-        // 4.监听键盘
-        // 键盘的frame(位置)即将改变, 就会发出UIKeyboardWillChangeFrameNotification
-        // 键盘即将弹出, 就会发出UIKeyboardWillShowNotification
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        // 键盘即将隐藏, 就会发出UIKeyboardWillHideNotification
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-        
-    }
-    return _editView;
-}
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-}
-
-/**
- *  view显示完毕的时候再弹出键盘，避免显示控制器view的时候会卡住
- */
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    // 成为第一响应者（叫出键盘）
-    [self.editView becomeFirstResponder];
-}
-
-
-#pragma mark - 键盘处理
-/**
- *  键盘即将隐藏：工具条（toolbar）随着键盘移动
- */
-- (void)keyboardWillHide:(NSNotification *)note
-{
-    //需要判断是否自定义切换的键盘
-    if (self.isChangingKeyboard) {
-        self.ChangingKeyboard = NO;
-        return;
-    }
-    
-    // 1.键盘弹出需要的时间
-    CGFloat duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    // 2.动画
-    [UIView animateWithDuration:duration animations:^{
-        self.toolBar.transform = CGAffineTransformIdentity;//回复之前的位置
-    }];
-}
-
-/**
- *  键盘即将弹出
- */
-- (void)keyboardWillShow:(NSNotification *)note
-{
-    // 1.键盘弹出需要的时间
-    CGFloat duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    // 2.动画
-    [UIView animateWithDuration:duration animations:^{
-        // 取出键盘高度
-        CGRect keyboardF = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        CGFloat keyboardH = keyboardF.size.height;
-        self.toolBar.transform = CGAffineTransformMakeTranslation(0, - keyboardH);
-    }];
-}
-
-
-
-#pragma mark - UITextViewDelegate
-/**
- *  当用户开始拖拽scrollView时调用
- */
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (void)viewTapped{
     [self.view endEditing:YES];
 }
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"caseLogNeedRef" object:nil];
+}
+
+- (void)initViews{
+    
+    _noteTextBackgroudView = [[UIView alloc]init];
+    _noteTextBackgroudView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+    
+    _noteTextView = [[UITextView alloc]init];
+    _noteTextView.textColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1.0];
+    _noteTextView.delegate = self;
+    _noteTextView.font = [UIFont boldSystemFontOfSize:14];
+    
+    _textNumberLabel = [[UILabel alloc]init];
+    _textNumberLabel.textAlignment = NSTextAlignmentRight;
+    _textNumberLabel.font = [UIFont boldSystemFontOfSize:12];
+    _textNumberLabel.textColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1.0];
+    _textNumberLabel.backgroundColor = [UIColor whiteColor];
+    _textNumberLabel.text = @"0/300    ";
+    
+    _explainLabel = [[UILabel alloc]init];
+    _explainLabel.text = @"添加图片不超过10张，文字备注不超过300字";
+    _explainLabel.textColor = [UIColor colorWithRed:199.0/255.0 green:199.0/255.0 blue:199.0/255.0 alpha:1.0];
+    _explainLabel.textAlignment = NSTextAlignmentCenter;
+    _explainLabel.font = [UIFont boldSystemFontOfSize:12];
+    
+    _submitBtn = [[UIButton alloc]init];
+    [_submitBtn setTitle:@"提交" forState:UIControlStateNormal];
+    [_submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_submitBtn setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:155.0/255.0 blue:0.0/255.0 alpha:1.0]];
+    [_submitBtn addTarget:self action:@selector(submitBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_scrollView addSubview:_noteTextBackgroudView];
+    [_scrollView addSubview:_noteTextView];
+    [_scrollView addSubview:_textNumberLabel];
+    [_scrollView addSubview:_explainLabel];
+    [_scrollView addSubview:_submitBtn];
+    
+    [self updateViewsFrame];
+}
+- (void)updateViewsFrame{
+    
+    if (!allViewHeight) {
+        allViewHeight = 0;
+    }
+    if (!noteTextHeight) {
+        noteTextHeight = 100;
+    }
+    
+    _noteTextBackgroudView.frame = CGRectMake(0, 0, SCREEN_WIDTH, noteTextHeight);
+    
+    //文本编辑框
+    _noteTextView.frame = CGRectMake(15, 0, SCREEN_WIDTH - 30, noteTextHeight);
+    
+    
+    //文字个数提示Label
+    _textNumberLabel.frame = CGRectMake(0, _noteTextView.frame.origin.y + _noteTextView.frame.size.height-15, SCREEN_WIDTH-10, 15);
+    
+    
+    //photoPicker
+    [self LQPhotoPicker_updatePickerViewFrameY:_textNumberLabel.frame.origin.y + _textNumberLabel.frame.size.height];
+    
+    
+    //说明文字
+    _explainLabel.frame = CGRectMake(0, [self LQPhotoPicker_getPickerViewFrame].origin.y+[self LQPhotoPicker_getPickerViewFrame].size.height+10, SCREEN_WIDTH, 20);
+    
+    
+    //提交按钮
+    _submitBtn.bounds = CGRectMake(10, _explainLabel.frame.origin.y+_explainLabel.frame.size.height +30, SCREEN_WIDTH -20, 40);
+    _submitBtn.frame = CGRectMake(10, _explainLabel.frame.origin.y+_explainLabel.frame.size.height +30, SCREEN_WIDTH -20, 40);
+    
+    
+    allViewHeight = noteTextHeight + [self LQPhotoPicker_getPickerViewFrame].size.height + 30 + 100;
+    
+    _scrollView.contentSize = self.scrollView.contentSize = CGSizeMake(0,allViewHeight);
+}
+
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    _textNumberLabel.text = [NSString stringWithFormat:@"%lu/300    ",(unsigned long)_noteTextView.text.length];
+    if (_noteTextView.text.length > 300) {
+        _textNumberLabel.textColor = [UIColor redColor];
+    }
+    else{
+        _textNumberLabel.textColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1.0];
+    }
+    
+    [self textChanged];
+    
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+    }
+    return YES;
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView{
+    _textNumberLabel.text = [NSString stringWithFormat:@"%lu/300    ",(unsigned long)_noteTextView.text.length];
+    if (_noteTextView.text.length > 300) {
+        _textNumberLabel.textColor = [UIColor redColor];
+    }
+    else{
+        _textNumberLabel.textColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1.0];
+    }
+    [self textChanged];
+}
+
+-(void)textChanged{
+    
+    CGRect orgRect = self.noteTextView.frame;//获取原始UITextView的frame
+    
+    CGSize size = [self.noteTextView sizeThatFits:CGSizeMake(self.noteTextView.frame.size.width, MAXFLOAT)];
+    
+    orgRect.size.height=size.height+10;//获取自适应文本内容高度
+    
+    if (orgRect.size.height > 100) {
+        noteTextHeight = orgRect.size.height;
+    }
+    [self updateViewsFrame];
+}
+
+- (void)submitBtnClicked{
+    
+    if (![self checkInput]) {
+        return;
+    }
+    [self submitToServer];
+}
+
+#pragma maek - 检查输入
+- (BOOL)checkInput{
+    if (_noteTextView.text.length == 0) {
+        //MBhudText(self.view, @"请添加记录备注", 1);
+        return NO;
+    }
+    return YES;
+}
+
+
+#pragma mark - 上传数据到服务器前将图片转data（上传服务器用form表单：未写）
+- (void)submitToServer{
+    NSMutableArray *bigImageArray = [self LQPhotoPicker_getBigImageArray];
+    //大图数据
+    NSMutableArray *bigImageDataArray = [self LQPhotoPicker_getBigImageDataArray];
+    
+    //小图数组
+    NSMutableArray *smallImageArray = [self LQPhotoPicker_getSmallImageArray];
+    
+    //小图数据
+    NSMutableArray *smallImageDataArray = [self LQPhotoPicker_getSmallDataImageArray];
+    
+    
+    
+}
+
+- (void)LQPhotoPicker_pickerViewFrameChanged{
+    [self updateViewsFrame];
+}
+
+
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -108,7 +108,7 @@
         hoseImage.frame = CGRectMake(jobKind.left, lineFo.bottom+15, 20, 20);
         
         //办公楼名称
-        LWTextStorage *workNameText = [self createTextWithFrame:CGRectMake(hoseImage.right, hoseImage.top, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
+        LWTextStorage *workNameText = [self createTextWithFrame:CGRectMake(hoseImage.right+3, hoseImage.top+2, CGFLOAT_MAX, CGFLOAT_MAX) andTextColor:SecondTitleColor andTextFont:descTitleSize];
         workNameText.text = @"西安市雁塔区永松路2号紫薇花园";
         [workNameText lw_addLinkWithData:workNameText.text range:NSMakeRange(0, workNameText.text.length) linkColor:SecondTitleColor highLightColor:clearC];
         //线

@@ -25,6 +25,8 @@
 //选择按钮高度
 @property(nonatomic,assign,readonly) CGFloat seleButtonSize;
 
+//切换按钮高度
+@property(nonatomic,assign,readonly) CGFloat segumentSize;
 
 //初始化方法;
 +(id)shareStringManager;

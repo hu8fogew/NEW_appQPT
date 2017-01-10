@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MessageLayout;
 @interface MessageTableViewCell : UITableViewCell
 
+@property(nonatomic,strong)MessageLayout *messageLayout;
 /*图片*/
 @property (strong,nonatomic) UIImageView *imgView;
 
