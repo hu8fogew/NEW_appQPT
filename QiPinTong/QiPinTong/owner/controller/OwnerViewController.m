@@ -51,7 +51,7 @@
         [otherBtn setTitleColor:HWColor(91, 85, 132) forState:UIControlStateNormal];
         [otherBtn setBackgroundColor:[UIColor clearColor]];
         otherBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [otherBtn addTarget:self action:@selector(clickOtherBtn) forControlEvents:UIControlEventTouchUpInside];
+        [otherBtn addTarget:self action:@selector(clickOtherBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_bottomView addSubview:otherBtn];
         
         [otherBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -124,15 +124,62 @@
 }
 
 //点击其他方式登录
--(void)clickOtherBtn{
+-(void)clickOtherBtn:(UIButton *)sender
+{
     NSArray *contentArray = @[@{@"name":@"QQ",@"icon":@"sns_icon_qq"},
         @{@"name":@"微信",@"icon":@"sns_icon_wechat"},
         @{@"name":@"新浪微博",@"icon":@"sns_icon_weibo"},
                               ];
     JWShareView *shareView = [[JWShareView alloc] init];
     [shareView addShareItems:self.view shareItems:contentArray selectShareItem:^(NSInteger tag, NSString *title) {
+        switch (tag) {
+            case 0:
+                [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+                   
+                    if (state == SSDKResponseStateSuccess) {
+                        
+                        HWLog(@"%@",user.credential);
+                        HWLog(@"%@",user.nickname);
+                        HWLog(@"%@",user.uid);
+                        HWLog(@"%@",user.credential.token);
+                    }
+                    else
+                    {
+                        HWLog(@"%@",error);
+                    }
+                    
+                }];
+                break;
+            case 1:
+                
+                [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+                    if (state == SSDKResponseStateSuccess) {
+                   
+                        HWLog(@"wechat=====sucess");
+                    }
+                    else
+                    {
+                        HWLog(@"wechat=====%@",error);
+                    }
+                }];
+                break;
+            case 2:
+                [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+                    if (state == SSDKResponseStateSuccess) {
+                        HWLog(@"SinaWeibo=====sucess");
+                    }
+                    else
+                    {
+                        HWLog(@"SinaWeibo=====%@",error);
+                    }
+                }];
+                break;
+            default:
+                break;
+        }
         NSLog(@"%ld --- %@", tag, title);
     }];
+         
 }
 
 

@@ -20,7 +20,6 @@
 #define subTitleSize [[StringSizeManager shareStringManager] suTitleSize]
 
 
-
 /*视图尺寸*/
 //搜索框高度
 #define searchHeight [[StringSizeManager shareStringManager] searchBarSize]

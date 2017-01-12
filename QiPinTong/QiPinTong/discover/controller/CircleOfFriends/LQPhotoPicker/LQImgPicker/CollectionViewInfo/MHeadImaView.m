@@ -50,6 +50,7 @@
     [self.collectionView reloadData];
     
     
+    
 }
 
 - (CGSize)getImaSizeWithAsset:(ALAsset *)set {

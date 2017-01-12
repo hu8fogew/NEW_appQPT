@@ -108,12 +108,44 @@
 /*获取验证码*/
 -(void)clickCommitBtn{
     HWLog(@"获取验证码");
+    
+    /**
+     *  @from                    v1.1.1
+     *  @brief                   获取验证码(Get verification code)
+     *
+     *  @param method            获取验证码的方法(The method of getting verificationCode)
+     *  @param phoneNumber       电话号码(The phone number)
+     *  @param zone              区域号，不要加"+"号(Area code)
+     *  @param customIdentifier  自定义短信模板标识 该标识需从官网http://www.mob.com上申请，审核通过后获得。(Custom model of SMS.  The identifier can get it  from http://www.mob.com  when the application had approved)
+     *  @param result            请求结果回调(Results of the request)
+     */
+
+    [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:@"18209295072" zone:@"86" customIdentifier:nil result:^(NSError *error) {
+        if (!error) {
+            
+            HWLog(@"获取成功");
+        }
+        else
+        {
+            HWLog(@"%@",error);
+        }
+    }];
 
 }
 
 /*注册按钮*/
 -(void)clickregisterBtn{
+    
     HWLog(@"注册");
+
+    [SMSSDK commitVerificationCode:@"" phoneNumber:@"" zone:@"" result:^(SMSSDKUserInfo *userInfo, NSError *error) {
+        if (!error) {
+            
+        }else
+        {
+            
+        }
+    }];
 }
 
 /*会员登录*/
